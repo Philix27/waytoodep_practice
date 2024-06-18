@@ -1,6 +1,6 @@
 mod dumb;
 
-use color_eyre::Report;
+use color_eyre::{owo_colors::OwoColorize, Report};
 use reqwest::Client;
 use tracing::info;
 use tracing_subscriber::EnvFilter;
@@ -9,26 +9,31 @@ use tracing_subscriber::EnvFilter;
 async fn main() -> Result<(), Report> {
     setup()?;
     info!("Hello from a comfy nest we've made for ourselves");
-    let client = Client::new();
+    // let client = Client::new();
 
-    const URL_1: &str = "https://fasterthanli.me/articles/whats-in-the-box";
-    const URL_2: &str = "https://fasterthanli.me/series/advent-of-code-2020/part-13";
-    let url = "https://fasterthanli.me";
+    // const URL_1: &str = "https://fasterthanli.me/articles/whats-in-the-box";
+    // const URL_2: &str = "https://fasterthanli.me/series/advent-of-code-2020/part-13";
+    // let url = "https://fasterthanli.me";
 
-    fetch_thing(&client, url).await?;
-    fetch_thing(&client, URL_1).await?;
-    fetch_thing(&client, URL_2).await?;
-    // this will turn non-200 HTTP status codes into rust errors,
-    // so the first `?` propagates "we had a connection problem" and
-    // the second `?` propagates "we had a chat with the server and they
-    // were not pleased"
-    let res = client.get(url).send().await?.error_for_status()?;
-    info!(%url, content_type = ?res.headers().get("content-type"), "Got a response!");
+    // fetch_thing(&client, url).await?;
+    // fetch_thing(&client, URL_1).await?;
+    // fetch_thing(&client, URL_2).await?;
+
+    info!("Building that dumb future...");
+    let fut = dumb::DumbFuture {};
+    info!("Awaiting that dumb future...");
+    fut.await;
+    info!("Done awaiting that dumb future");
 
     Ok(())
 }
 
 async fn fetch_thing(client: &Client, url: &str) -> Result<(), Report> {
+    // this will turn non-200 HTTP status codes into rust errors,
+    // so the first `?` propagates "we had a connection problem" and
+    // the second `?` propagates "we had a chat with the server and they
+    // were not pleased"
+    // let res = client.get(url).send().await?.error_for_status()?;
     let res = client.get(url).send().await?.error_for_status()?;
 
     info!(%url, content_type = ?res.headers().get("content-type"), "Got a response!");
