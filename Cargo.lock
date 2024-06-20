@@ -888,7 +888,7 @@ dependencies = [
  "log",
  "ring 0.16.20",
  "sct 0.6.1",
- "webpki",
+ "webpki 0.21.4",
 ]
 
 [[package]]
@@ -1165,7 +1165,7 @@ checksum = "bc6844de72e57df1980054b38be3a9f4702aba4858be64dd700181a8a6d0e1b6"
 dependencies = [
  "rustls 0.19.1",
  "tokio",
- "webpki",
+ "webpki 0.21.4",
 ]
 
 [[package]]
@@ -1426,7 +1426,7 @@ dependencies = [
  "tokio-rustls 0.22.0",
  "tracing",
  "tracing-subscriber",
- "webpki",
+ "webpki 0.22.2",
  "webpki-roots 0.21.1",
 ]
 
@@ -1451,12 +1451,22 @@ dependencies = [
 ]
 
 [[package]]
+name = "webpki"
+version = "0.22.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "07ecc0cd7cac091bf682ec5efa18b1cff79d617b84181f38b3951dbe135f607f"
+dependencies = [
+ "ring 0.16.20",
+ "untrusted 0.7.1",
+]
+
+[[package]]
 name = "webpki-roots"
 version = "0.21.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "aabe153544e473b775453675851ecc86863d2a81d786d741f6b76778f2a48940"
 dependencies = [
- "webpki",
+ "webpki 0.21.4",
 ]
 
 [[package]]
